@@ -17,9 +17,9 @@ module.exports = NodeHelper.create({
 
   fetchNotionData: async function(config) {
     try {
-      const apiKey = process.env.NOTION_API_KEY || config.apiKey;
-      const pageId = process.env.TODO_LIST_ID || config.pageId;
-      console.log(apiKey, pageId)
+      const apiKey = config.apiKey;
+      const pageId = config.pageId;
+      console.log("KEYS HERE:", apiKey, pageId)
 
       // Use the dynamically imported Client
       const notion = new this.Client({ auth: apiKey });
