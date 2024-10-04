@@ -78,6 +78,7 @@ Module.register("MMM-Notion-Todo-List", {
   handleCheckboxChange: function(taskId, taskIndex, isChecked) {
     // Update the local task state
     this.tasks[taskIndex].checked = isChecked;
+    console.log(JSON.stringify(this.tasks))
 
     // Send the update to the Node helper
     this.sendSocketNotification("UPDATE_TASK_STATUS", {
