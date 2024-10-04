@@ -29,6 +29,11 @@ module.exports = NodeHelper.create({
 
       console.log(taskId, parentId, checked)
 
+      await notion.block.update({
+        blockId: taskId,
+        to_do: { checked }
+      })
+
       // Update the task in Notion
       // await notion.pages.update({
       //   page_id: taskId,
