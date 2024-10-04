@@ -30,7 +30,7 @@ module.exports = NodeHelper.create({
       console.log(taskId, parentId, checked)
 
       await notion.blocks.update({
-        blockId: taskId,
+        block_id: taskId,
         to_do: { checked }
       })
 
