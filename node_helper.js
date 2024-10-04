@@ -25,8 +25,6 @@ module.exports = NodeHelper.create({
       const apiKey = config.apiKey;
       const notion = new this.Client({ auth: apiKey });
 
-      console.log(payload.task)
-
       // Update the task in Notion
       // await notion.pages.update({
       //   page_id: taskId,
@@ -55,6 +53,8 @@ module.exports = NodeHelper.create({
       const notion = new this.Client({ auth: apiKey });
       const blocks = await this.retrieveBlockChildren(notion, pageId);
       const tasks = this.getTasksFromBlocks(blocks);
+
+      console.log(tasks)
 
       this.sendSocketNotification("NOTION_DATA", tasks);
     } catch (error) {
