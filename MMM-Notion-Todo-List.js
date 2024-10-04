@@ -1,8 +1,6 @@
 Module.register("MMM-Notion-Todo-List", {
   defaults: {
     updateInterval: 60000,
-    apiKey: "", // Optional: You can set your Notion API key here
-    pageId: "", // Optional: You can set your Notion Page ID here
   },
 
   start: function() {

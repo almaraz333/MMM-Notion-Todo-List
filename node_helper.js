@@ -5,7 +5,6 @@ config();
 module.exports = NodeHelper.create({
   async start() {
     console.log("MMM-Notion-Todo-List helper started...");
-    // Initialize the Notion client dynamically
     const { Client } = await import("@notionhq/client");
     this.Client = Client;
   },
@@ -20,6 +19,7 @@ module.exports = NodeHelper.create({
     try {
       const apiKey = process.env.NOTION_API_KEY || config.apiKey;
       const pageId = process.env.TODO_LIST_ID || config.pageId;
+      console.log(apiKey, pageId)
 
       // Use the dynamically imported Client
       const notion = new this.Client({ auth: apiKey });
