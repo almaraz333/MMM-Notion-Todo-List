@@ -9,7 +9,6 @@ module.exports = NodeHelper.create({
 
   socketNotificationReceived: async function(notification, payload) {
     if (notification === "FETCH_NOTION_DATA") {
-      console.log("CONFIG AFTER SEND", payload)
       this.fetchNotionData(payload);
     }
   },
@@ -18,7 +17,6 @@ module.exports = NodeHelper.create({
     try {
       const apiKey = config.apiKey;
       const pageId = config.pageId;
-      console.log("KEYS HERE:", apiKey, pageId)
 
       // Use the dynamically imported Client
       const notion = new this.Client({ auth: apiKey });

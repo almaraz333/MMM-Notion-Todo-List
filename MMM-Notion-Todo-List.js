@@ -15,7 +15,6 @@ Module.register("MMM-Notion-Todo-List", {
 
   getData: function() {
     console.log("Requesting data from Node helper...");
-    console.log("CONFIG PRE SEND", this.config)
     this.sendSocketNotification("FETCH_NOTION_DATA", this.config);
   },
 
@@ -28,7 +27,9 @@ Module.register("MMM-Notion-Todo-List", {
       console.error("Error from Node helper:", payload);
     }
   },
-
+  getStyles: function() {
+    return ["MMM-Notion-Todo-List.css"];
+  },
   getDom: function() {
     const wrapper = document.createElement("div");
 
@@ -37,18 +38,34 @@ Module.register("MMM-Notion-Todo-List", {
       return wrapper;
     }
 
-    const list = document.createElement("ul");
-    list.style.cssText = "color: white;";
+    const listContainer = document.createElement("div");
+    listContainer.className = "notion-task-list";
+
     this.tasks.forEach((task) => {
-      const listItem = document.createElement("li");
-      listItem.textContent = task.checked
-        ? `☑️ ${task.text}`
-        : `⬜ ${task.text}`;
-      list.appendChild(listItem);
+      const taskItem = document.createElement("div");
+      taskItem.className = "notion-task-item";
+
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.checked = task.checked;
+      checkbox.disabled = true;
+
+      const label = document.createElement("label");
+      label.className = "notion-task-label";
+      label.textContent = task.text;
+
+      if (task.checked) {
+        label.classList.add("completed");
+      }
+
+      taskItem.appendChild(checkbox);
+      taskItem.appendChild(label);
+      listContainer.appendChild(taskItem);
     });
 
-    wrapper.appendChild(list);
+    wrapper.appendChild(listContainer);
     return wrapper;
   },
+
 });
 

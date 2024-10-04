@@ -1,0 +1,36 @@
+/* MMM-Notion-Todo-List.css */
+
+.notion-task-list {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+}
+
+.notion-task-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.notion-task-item:last-child {
+  margin-bottom: 0;
+}
+
+.notion-task-item input[type="checkbox"] {
+  margin-right: 10px;
+  width: 18px;
+  height: 18px;
+  cursor: default;
+}
+
+.notion-task-label {
+  font-size: 16px;
+  color: white; /* Adjust as needed */
+}
+
+.notion-task-label.completed {
+  text-decoration: line-through;
+  color: #888888; /* Adjust as needed */
+}
+
