@@ -42,7 +42,6 @@ Module.register("MMM-Notion-Todo-List", {
     listContainer.className = "notion-task-list";
 
     this.tasks.forEach((task, index) => {
-      console.log("TASK HERE--=-==--=-", task)
       const taskItem = document.createElement("div");
       taskItem.className = "notion-task-item";
 
