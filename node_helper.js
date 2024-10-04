@@ -22,7 +22,7 @@ module.exports = NodeHelper.create({
   updateTaskStatus: async function(payload) {
     try {
 
-      const apiKey = config.apiKey;
+      const apiKey = payload.config.apiKey;
       const notion = new this.Client({ auth: apiKey });
 
       const { taskId, parentId, checked } = payload;
