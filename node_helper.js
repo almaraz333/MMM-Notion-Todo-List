@@ -25,26 +25,14 @@ module.exports = NodeHelper.create({
       const apiKey = payload.config.apiKey;
       const notion = new this.Client({ auth: apiKey });
 
-      const { taskId, parentId, checked } = payload;
-
-      console.log(taskId, parentId, checked)
+      const { taskId, checked } = payload;
 
       await notion.blocks.update({
         block_id: taskId,
         to_do: { checked }
       })
 
-      // Update the task in Notion
-      // await notion.pages.update({
-      //   page_id: taskId,
-      //   properties: {
-      //     "Done": {
-      //       checkbox: checked,
-      //     },
-      //   },
-      // });
-
-      // this.fetchNotionData(config);
+      this.fetchNotionData(config);
 
     } catch (error) {
       console.error("Error updating task status in Notion:", error);
