@@ -81,8 +81,7 @@ Module.register("MMM-Notion-Todo-List", {
 
     // Send the update to the Node helper
     this.sendSocketNotification("UPDATE_TASK_STATUS", {
-      taskId: taskId,
-      checked: isChecked,
+      task: this.tasks[taskIndex],
       config: this.config
     });
 

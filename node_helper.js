@@ -21,12 +21,11 @@ module.exports = NodeHelper.create({
   },
   updateTaskStatus: async function(payload) {
     try {
-      const { taskId, checked, config } = payload;
 
       const apiKey = config.apiKey;
       const notion = new this.Client({ auth: apiKey });
 
-      console.log(taskId, checked)
+      console.log(payload.task)
 
       // Update the task in Notion
       // await notion.pages.update({
