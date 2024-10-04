@@ -1,4 +1,7 @@
 Module.register("MMM-Notion-Todo-List", {
+  defaults: {
+    updateInterval: 60000,
+  },
 
   start: function() {
     console.log("MMM-Notion-Todo-List module started.");
