@@ -1,5 +1,4 @@
 const NodeHelper = require("node_helper");
-const { config } = require("dotenv");
 config();
 
 module.exports = NodeHelper.create({
@@ -11,6 +10,7 @@ module.exports = NodeHelper.create({
 
   socketNotificationReceived: async function(notification, payload) {
     if (notification === "FETCH_NOTION_DATA") {
+      console.log("CONFIG AFTER SEND", JSON.stringify(payload))
       this.fetchNotionData(payload);
     }
   },
