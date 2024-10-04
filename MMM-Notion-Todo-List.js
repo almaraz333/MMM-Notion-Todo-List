@@ -22,7 +22,6 @@ Module.register("MMM-Notion-Todo-List", {
     if (notification === "NOTION_DATA") {
       console.log("Received tasks from Node helper:", payload);
       this.tasks = payload;
-      this.updateDom();
     } else if (notification === "NOTION_ERROR") {
       console.error("Error from Node helper:", payload);
     }
@@ -87,7 +86,6 @@ Module.register("MMM-Notion-Todo-List", {
       config: this.config
     });
 
-    this.updateDom();
   },
 
 
