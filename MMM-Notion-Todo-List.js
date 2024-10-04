@@ -29,8 +29,8 @@ Module.register("MMM-Notion-Todo-List", {
 
   fetchNotionData: async function() {
     // This function will perform the actual API call
-    const pageId = process.env.TODO_LIST_ID;
-    const apiKey = process.env.NOTION_API_KEY;
+    const pageId = this.config.pageId;
+    const apiKey = this.config.apiKey;
 
     const notion = new Client({ auth: apiKey });
 
