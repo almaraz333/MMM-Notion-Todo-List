@@ -25,6 +25,10 @@ module.exports = NodeHelper.create({
       const apiKey = config.apiKey;
       const notion = new this.Client({ auth: apiKey });
 
+      const { taskId, parentId, checked } = payload;
+
+      console.log(taskId, parentId, checked)
+
       // Update the task in Notion
       // await notion.pages.update({
       //   page_id: taskId,
@@ -85,8 +89,11 @@ module.exports = NodeHelper.create({
         return {
           text: this.getPlainTextFromRichText(block.to_do.rich_text),
           checked: block.to_do.checked,
+          id: block.id,
+          parentId: block.parent.page_id
         };
       });
+
     return tasks;
   },
 
