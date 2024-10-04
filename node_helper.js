@@ -1,14 +1,16 @@
-import NodeHelper from "node_helper";
-import { Client } from "@notionhq/client";
-const { iteratePaginatedAPI } = require("@notionhq/client/helpers");
-require("dotenv").config();
+const NodeHelper = require("node_helper");
+const { config } = require("dotenv");
+config();
 
 module.exports = NodeHelper.create({
-  start: function() {
+  async start() {
     console.log("MMM-Notion-Todo-List helper started...");
+    // Initialize the Notion client dynamically
+    const { Client } = await import("@notionhq/client");
+    this.Client = Client;
   },
 
-  socketNotificationReceived: function(notification, payload) {
+  socketNotificationReceived: async function(notification, payload) {
     if (notification === "FETCH_NOTION_DATA") {
       this.fetchNotionData(payload);
     }
@@ -19,7 +21,8 @@ module.exports = NodeHelper.create({
       const apiKey = process.env.NOTION_API_KEY || config.apiKey;
       const pageId = process.env.TODO_LIST_ID || config.pageId;
 
-      const notion = new Client({ auth: apiKey });
+      // Use the dynamically imported Client
+      const notion = new this.Client({ auth: apiKey });
       const blocks = await this.retrieveBlockChildren(notion, pageId);
       const tasks = this.getTasksFromBlocks(blocks);
 
