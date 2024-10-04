@@ -41,14 +41,23 @@ Module.register("MMM-Notion-Todo-List", {
     const listContainer = document.createElement("div");
     listContainer.className = "notion-task-list";
 
-    this.tasks.forEach((task) => {
+    this.tasks.forEach((task, index) => {
       const taskItem = document.createElement("div");
       taskItem.className = "notion-task-item";
 
       const checkbox = document.createElement("input");
       checkbox.type = "checkbox";
       checkbox.checked = task.checked;
-      checkbox.disabled = true;
+      checkbox.dataset.taskId = task.id; // Store task ID
+      checkbox.dataset.taskIndex = index; // Store task index
+
+      // Add event listener to handle touch/click events
+      checkbox.addEventListener("change", (event) => {
+        const taskId = event.target.dataset.taskId;
+        const taskIndex = event.target.dataset.taskIndex;
+        const isChecked = event.target.checked;
+        this.handleCheckboxChange(taskId, taskIndex, isChecked);
+      });
 
       const label = document.createElement("label");
       label.className = "notion-task-label";
@@ -66,6 +75,19 @@ Module.register("MMM-Notion-Todo-List", {
     wrapper.appendChild(listContainer);
     return wrapper;
   },
+  handleCheckboxChange: function(taskId, taskIndex, isChecked) {
+    // Update the local task state
+    this.tasks[taskIndex].checked = isChecked;
+
+    // Send the update to the Node helper
+    this.sendSocketNotification("UPDATE_TASK_STATUS", {
+      taskId: taskId,
+      checked: isChecked,
+    });
+
+    this.updateDom();
+  },
+
 
 });
 

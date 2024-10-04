@@ -12,6 +12,38 @@ module.exports = NodeHelper.create({
       this.fetchNotionData(payload);
     }
   },
+  socketNotificationReceived: function(notification, payload) {
+    if (notification === "FETCH_NOTION_DATA") {
+      this.fetchNotionData(payload);
+    } else if (notification === "UPDATE_TASK_STATUS") {
+      this.updateTaskStatus(payload);
+    }
+  },
+  updateTaskStatus: async function(payload) {
+    try {
+      const apiKey = this.config.apiKey;
+      const notion = new Client({ auth: apiKey });
+
+      const { taskId, checked } = payload;
+
+      // Update the task in Notion
+      await notion.pages.update({
+        page_id: taskId,
+        properties: {
+          "Done": {
+            checkbox: checked,
+          },
+        },
+      });
+
+      this.fetchNotionData(this.config);
+
+    } catch (error) {
+      console.error("Error updating task status in Notion:", error);
+      this.sendSocketNotification("NOTION_ERROR", error.message);
+    }
+  },
+
 
   fetchNotionData: async function(config) {
     try {
