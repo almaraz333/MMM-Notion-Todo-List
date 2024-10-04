@@ -54,8 +54,6 @@ module.exports = NodeHelper.create({
       const blocks = await this.retrieveBlockChildren(notion, pageId);
       const tasks = this.getTasksFromBlocks(blocks);
 
-      console.log(tasks)
-
       this.sendSocketNotification("NOTION_DATA", tasks);
     } catch (error) {
       console.error("Error fetching Notion data:", error);
@@ -80,6 +78,7 @@ module.exports = NodeHelper.create({
   },
 
   getTasksFromBlocks: function(blocks) {
+    console.log(blocks)
     const tasks = blocks
       .filter((block) => block.type === "to_do")
       .map((block) => {
