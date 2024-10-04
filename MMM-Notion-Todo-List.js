@@ -22,6 +22,7 @@ Module.register("MMM-Notion-Todo-List", {
     if (notification === "NOTION_DATA") {
       console.log("Received tasks from Node helper:", payload);
       this.tasks = payload;
+      this.updateDom();
     } else if (notification === "NOTION_ERROR") {
       console.error("Error from Node helper:", payload);
     }
@@ -52,7 +53,6 @@ Module.register("MMM-Notion-Todo-List", {
 
       // Add event listener to handle touch/click events
       checkbox.addEventListener("change", (event) => {
-        console.log("?????", this.tasks)
         const taskId = event.target.dataset.taskId;
         const taskIndex = event.target.dataset.taskIndex;
         const isChecked = event.target.checked;
@@ -86,6 +86,7 @@ Module.register("MMM-Notion-Todo-List", {
       config: this.config
     });
 
+    this.updateDom();
   },
 
 
