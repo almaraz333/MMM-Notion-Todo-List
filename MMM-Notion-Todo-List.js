@@ -15,7 +15,7 @@ Module.register("MMM-Notion-Todo-List", {
 
   getData: function() {
     console.log("Requesting data from Node helper...");
-    console.log("CONFIG PRE SEND", JSON.stringify(config))
+    console.log("CONFIG PRE SEND", config)
     this.sendSocketNotification("FETCH_NOTION_DATA", this.config);
   },
 

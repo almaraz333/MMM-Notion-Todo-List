@@ -10,7 +10,7 @@ module.exports = NodeHelper.create({
 
   socketNotificationReceived: async function(notification, payload) {
     if (notification === "FETCH_NOTION_DATA") {
-      console.log("CONFIG AFTER SEND", JSON.stringify(payload))
+      console.log("CONFIG AFTER SEND", payload)
       this.fetchNotionData(payload);
     }
   },
