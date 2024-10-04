@@ -25,7 +25,7 @@ module.exports = NodeHelper.create({
 
       const apiKey = config.apiKey;
       const notion = new this.Client({ auth: apiKey });
-
+      console.log("TASK ID -----=======", taskId)
       // Update the task in Notion
       await notion.pages.update({
         page_id: taskId,
