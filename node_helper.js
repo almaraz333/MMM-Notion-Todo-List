@@ -1,5 +1,5 @@
 const NodeHelper = require("node_helper");
-const { Client } = require("@notionhq/client");
+import { Client } from "@notionhq/client";
 const { iteratePaginatedAPI } = require("@notionhq/client/helpers");
 require("dotenv").config();
 
