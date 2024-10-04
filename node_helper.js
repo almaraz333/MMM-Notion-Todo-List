@@ -75,7 +75,6 @@ module.exports = NodeHelper.create({
   },
 
   getTasksFromBlocks: function(blocks) {
-    console.log(blocks)
     const tasks = blocks
       .filter((block) => block.type === "to_do")
       .map((block) => {
