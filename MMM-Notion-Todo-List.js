@@ -19,6 +19,7 @@ Module.register("MMM-Notion-Todo-List", {
     this.fetchNotionData()
       .then((tasks) => {
         this.tasks = tasks; // Store the fetched tasks
+        console.log(tasks)
         this.updateDom(); // Trigger DOM update to display the tasks
       })
       .catch((error) => {
