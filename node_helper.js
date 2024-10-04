@@ -32,7 +32,7 @@ module.exports = NodeHelper.create({
         to_do: { checked }
       })
 
-      this.fetchNotionData(config);
+      this.fetchNotionData(payload.config);
 
     } catch (error) {
       console.error("Error updating task status in Notion:", error);
