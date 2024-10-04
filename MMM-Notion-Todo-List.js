@@ -83,6 +83,7 @@ Module.register("MMM-Notion-Todo-List", {
     this.sendSocketNotification("UPDATE_TASK_STATUS", {
       taskId: taskId,
       checked: isChecked,
+      config: this.config
     });
 
     this.updateDom();

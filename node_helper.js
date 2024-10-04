@@ -21,10 +21,10 @@ module.exports = NodeHelper.create({
   },
   updateTaskStatus: async function(payload) {
     try {
-      const apiKey = this.config.apiKey;
-      const notion = new Client({ auth: apiKey });
+      const { taskId, checked, config } = payload;
 
-      const { taskId, checked } = payload;
+      const apiKey = config.apiKey;
+      const notion = new Client({ auth: apiKey });
 
       // Update the task in Notion
       await notion.pages.update({
@@ -36,7 +36,7 @@ module.exports = NodeHelper.create({
         },
       });
 
-      this.fetchNotionData(this.config);
+      this.fetchNotionData(config);
 
     } catch (error) {
       console.error("Error updating task status in Notion:", error);
