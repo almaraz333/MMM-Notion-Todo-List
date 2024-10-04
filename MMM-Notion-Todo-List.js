@@ -71,6 +71,7 @@ Module.register("MMM-Notion-Todo-List", {
 
     // Display the tasks in the DOM
     const list = document.createElement("ul");
+    list.style.cssText = "color: white;"
     this.tasks.forEach((task) => {
       const listItem = document.createElement("li");
       listItem.textContent = task.checked
