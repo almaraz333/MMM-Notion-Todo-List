@@ -7,11 +7,6 @@ module.exports = NodeHelper.create({
     this.Client = Client;
   },
 
-  socketNotificationReceived: async function(notification, payload) {
-    if (notification === "FETCH_NOTION_DATA") {
-      this.fetchNotionData(payload);
-    }
-  },
   socketNotificationReceived: function(notification, payload) {
     if (notification === "FETCH_NOTION_DATA") {
       this.fetchNotionData(payload);
@@ -21,16 +16,21 @@ module.exports = NodeHelper.create({
   },
   updateTaskStatus: async function(payload) {
     try {
-
       const apiKey = payload.config.apiKey;
       const notion = new this.Client({ auth: apiKey });
 
       const { taskId, checked } = payload;
+      
+      console.log("Updating task status:", { taskId, checked });
+      
+      if (!taskId) {
+        throw new Error("Task ID is required for updating task status");
+      }
 
       await notion.blocks.update({
         block_id: taskId,
         to_do: { checked }
-      })
+      });
 
       this.fetchNotionData(payload.config);
 
@@ -45,6 +45,16 @@ module.exports = NodeHelper.create({
     try {
       const apiKey = config.apiKey;
       const pageId = config.pageId;
+
+      console.log("Fetching data with config:", { apiKey: apiKey ? "***" : "undefined", pageId });
+      
+      if (!apiKey) {
+        throw new Error("API key is required");
+      }
+      
+      if (!pageId) {
+        throw new Error("Page ID is required");
+      }
 
       // Use the dynamically imported Client
       const notion = new this.Client({ auth: apiKey });
@@ -63,7 +73,6 @@ module.exports = NodeHelper.create({
     let cursor;
 
     do {
-      console.log(id)
       const response = await notion.blocks.children.list({
         block_id: id,
         start_cursor: cursor,
