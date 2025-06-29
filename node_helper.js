@@ -63,12 +63,14 @@ module.exports = NodeHelper.create({
     let cursor;
 
     do {
-      const response = await notion.blocks.children.list({
-        block_id: id,
-        start_cursor: cursor,
-      });
-      blocks.push(...response.results);
-      cursor = response.has_more ? response.next_cursor : null;
+      if (id) {
+        const response = await notion.blocks.children.list({
+          block_id: id,
+          start_cursor: cursor,
+        });
+        blocks.push(...response.results);
+        cursor = response.has_more ? response.next_cursor : null;
+      }
     } while (cursor);
 
     return blocks;
